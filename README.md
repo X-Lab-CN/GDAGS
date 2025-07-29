@@ -2,7 +2,6 @@
 ## Installation
 
 ```
-pip install -r requirements.txt
 
 cd submodules
 python ./diff-gaussian-rasterization/setup.py install
