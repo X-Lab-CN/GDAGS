@@ -3,10 +3,12 @@
 
 ```
 
-cd submodules
-python ./diff-gaussian-rasterization/setup.py install
-python  ./fused-ssim/setup.py install
-python  ./simple-knn/setup.py install
+cd submodules/diff-gaussian-rasterization
+pip install -e .
+cd submodules/fused-ssim
+pip install -e .
+cd submodules/simple-knn
+pip install -e .
 ```
 
 ## Dataset
