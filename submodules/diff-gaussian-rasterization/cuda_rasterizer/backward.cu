@@ -622,20 +622,20 @@ renderCUDA(
 			const float dG_ddelx = -gdx * con_o.x - gdy * con_o.y;
 			const float dG_ddely = -gdy * con_o.z - gdx * con_o.y;
 
-			// Update gradients w.r.t. 2D mean position of the Gaussian
+			
 			atomicAdd(&dL_dmean2D[global_id].x, dL_dG * dG_ddelx * ddelx_dx);
 			atomicAdd(&dL_dmean2D[global_id].y, dL_dG * dG_ddely * ddely_dy);
 
-		        // // Homodirectional Gradient
-		        atomicAdd(&dL_dmean2D[global_id].z, fabs(dL_dG * dG_ddelx * ddelx_dx));
-		        atomicAdd(&dL_dmean2D[global_id].w, fabs(dL_dG * dG_ddely * ddely_dy));
+		       
+		    atomicAdd(&dL_dmean2D[global_id].z, fabs(dL_dG * dG_ddelx * ddelx_dx));
+		    atomicAdd(&dL_dmean2D[global_id].w, fabs(dL_dG * dG_ddely * ddely_dy));
 
-			// Update gradients w.r.t. 2D covariance (2x2 matrix, symmetric)
+			
 			atomicAdd(&dL_dconic2D[global_id].x, -0.5f * gdx * d.x * dL_dG);
 			atomicAdd(&dL_dconic2D[global_id].y, -0.5f * gdx * d.y * dL_dG);
 			atomicAdd(&dL_dconic2D[global_id].w, -0.5f * gdy * d.y * dL_dG);
 
-			// Update gradients w.r.t. opacity of the Gaussian
+			
 			atomicAdd(&(dL_dopacity[global_id]), G * dL_dalpha);
 		}
 	}
